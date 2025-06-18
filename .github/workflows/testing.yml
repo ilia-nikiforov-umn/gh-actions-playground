@@ -1,0 +1,12 @@
+name: Testing
+
+on: [push]
+
+jobs:
+    list-pip:
+        runs-on: ubuntu-22.04
+
+        steps:
+            - name: list python modules
+              run: |
+                python -m pip list
