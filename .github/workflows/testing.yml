@@ -12,4 +12,4 @@ jobs:
                 python -m pip list
             - name: print interesting github variables
               run: |
-                printf ${{ github.action_repository }}
+                printf ${{ github.repository }}
