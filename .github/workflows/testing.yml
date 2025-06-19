@@ -11,7 +11,5 @@ jobs:
               run: |
                 python -m pip list
             - name: print interesting github variables
-              env:
-                ACTION_REPOSITORY: ${{ github.action_repository }}
               run: |
-                printf $ACTION_REPOSITORY
+                printf ${{ github.action_repository }}
