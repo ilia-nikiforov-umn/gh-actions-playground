@@ -3,8 +3,12 @@ name: Testing
 on: [push]
 
 jobs:
-    list-pip:
-        runs-on: ubuntu-22.04
+    helloworld:
+        strategy:
+          matrix:
+            os: [ubuntu-22.04, macos-latest]
+        
+        runs-on: ${{ matrix.os }}
 
         steps:
             - name: list python modules
@@ -13,3 +17,4 @@ jobs:
             - name: print interesting github variables
               run: |
                 printf ${{ github.repository }}
+                printf ${{ runner.os }}
