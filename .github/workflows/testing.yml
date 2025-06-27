@@ -21,7 +21,7 @@ jobs:
             - name: install aflow
               if: runner.os == 'macOS'
               run: |
-                units -v
+                units eV J
                 brew tap aflow-org/aflow
                 brew install aflow 
                 aflow --version
