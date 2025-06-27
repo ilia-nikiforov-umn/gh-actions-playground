@@ -18,3 +18,8 @@ jobs:
               run: |
                 printf ${{ github.repository }}
                 printf ${{ runner.os }}
+            - name: install aflow
+              if: runner.os == 'macOS'
+              run: |
+                brew tap aflow-org/aflow
+                brew install aflow 
