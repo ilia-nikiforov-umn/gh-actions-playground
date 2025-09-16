@@ -14,9 +14,9 @@ jobs:
       - name: Send pull-request
         run: |
           RELEASE_TAG=$(cut -d'/' -f 3 <<< "$GITHUB_REF")
-          USER="ilia-nikiforov-umn"
-          REPOSITORY="gh-actions-playground"
-          BRANCH_NAME="update-dependency-to-$RELEASE_TAG"
+          USER="openkim"
+          REPOSITORY="developer-platform"
+          BRANCH_NAME="update-$GITHUB_REPOSITORY-to-$RELEASE_TAG"
 
           echo $RELEASE_TAG
           echo $USER
@@ -42,7 +42,7 @@ jobs:
           # Create a new feature branch for the changes.
           git checkout -b $BRANCH_NAME
 
-          echo $RELEASE_TAG >> README.md
+          echo "$GITHUB_REPOSITORY==$RELEASE_TAG" >> README.md
 
           # Commit the changes and push the feature branch to origin
           git add .
@@ -54,6 +54,6 @@ jobs:
           # create a pull-requests containing the updates.
           gh pr create \
             --body " " \
-            --title "update dependencies to $RELEASE_TAG" \
+            --title "update $GITHUB_REPOSITORY to $RELEASE_TAG" \
             --head "$BRANCH_NAME" \
             --base "main"
