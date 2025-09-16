@@ -14,6 +14,10 @@ jobs:
       - name: Send pull-request
         run: |
           RELEASE_TAG=$(cut -d'/' -f 3 <<< "$GITHUB_REF")
+          # Strip off the leading "v" from the release tag, if present
+          PYPI_VERSION=$(sed -n 's/^v*\([0-9]\+.[0-9]\+.[0-9]\)/\1/p' <<< "$RELEASE_TAG")
+          # check that the sed pattern matched something
+          [[ "$PYPI_VERSION" != "" ]]
           USER="ilia-nikiforov-umn"
           REPOSITORY="gh-actions-playground"
           BRANCH_NAME="update-$GITHUB_REPOSITORY-to-$RELEASE_TAG"
@@ -37,7 +41,7 @@ jobs:
           # Create a new feature branch for the changes.
           git checkout -b $BRANCH_NAME
 
-          echo "$GITHUB_REPOSITORY==$RELEASE_TAG" >> README.md
+          echo "$GITHUB_REPOSITORY==$PYPI_VERSION" >> README.md
 
           # Commit the changes and push the feature branch to origin
           git add .
