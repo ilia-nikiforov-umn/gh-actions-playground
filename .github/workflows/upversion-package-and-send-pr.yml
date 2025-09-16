@@ -14,14 +14,9 @@ jobs:
       - name: Send pull-request
         run: |
           RELEASE_TAG=$(cut -d'/' -f 3 <<< "$GITHUB_REF")
-          USER="openkim"
-          REPOSITORY="developer-platform"
+          USER="ilia-nikiforov-umn"
+          REPOSITORY="gh-actions-playground"
           BRANCH_NAME="update-$GITHUB_REPOSITORY-to-$RELEASE_TAG"
-
-          echo $RELEASE_TAG
-          echo $USER
-          echo $REPOSITORY
-          echo $BRANCH_NAME
 
           # Clone the remote repository and change working directory to the
           # folder it was cloned to.
@@ -46,7 +41,7 @@ jobs:
 
           # Commit the changes and push the feature branch to origin
           git add .
-          git commit -m "update dependency to $RELEASE_TAG"
+          git commit -m "update $GITHUB_REPOSITORY to $RELEASE_TAG"
           git push origin $BRANCH_NAME
 
 
